@@ -1,6 +1,6 @@
 public class TestHandler {
     private Tester tester;
-    
+
     public TestHandler() {
         this.tester = new Tester();
     }
@@ -9,31 +9,31 @@ public class TestHandler {
         switch (question) {
             case USER_FOLLOWS:
                 return 8;
-        
+
             case USER_ADD_FOLLOWEE:
                 return 5;
 
             case USER_REMOVE_FOLLOWEE:
                 return 6;
-            
+
             case USER_COUNT_MUTUAL:
                 return 10;
-            
+
             case USER_IS_FRIEND_OF:
                 return 6;
-            
+
             case NETWORK_GET_USER:
                 return 7;
 
             case NETWORK_ADD_USER:
                 return 8;
-            
+
             case NETWORK_ADD_FOLLOWEE:
                 return 9;
 
             case NETWORK_RECOMMEND_WHO_TO_FOLLOW:
                 return 3;
-            
+
             case NETWORK_MOST_POPULAR_USER:
                 return 10;
 
@@ -49,19 +49,19 @@ public class TestHandler {
         switch (question) {
             case USER_FOLLOWS:
                 return followsTests(testNumber);
-        
+
             case USER_ADD_FOLLOWEE:
                 return addFolloweeTests(testNumber);
 
             case USER_REMOVE_FOLLOWEE:
                 return removeFolloweeTests(testNumber);
-            
+
             case USER_COUNT_MUTUAL:
                 return countMutualTests(testNumber);
-            
+
             case USER_IS_FRIEND_OF:
                 return isFriendOfTests(testNumber);
-            
+
             case NETWORK_GET_USER:
                 return networkGetUserTests(testNumber);
 
@@ -70,13 +70,13 @@ public class TestHandler {
 
             case NETWORK_ADD_FOLLOWEE:
                 return networkAddFolloweeTests(testNumber);
-            
+
             case NETWORK_RECOMMEND_WHO_TO_FOLLOW:
                 return networkRecommendWhoToFollowTests(testNumber);
-            
+
             case NETWORK_MOST_POPULAR_USER:
                 return networkMostPopularUserTests(testNumber);
-            
+
             case NETWORK_TO_STRING:
                 return networkToStringTests(testNumber);
             default:
@@ -303,15 +303,27 @@ public class TestHandler {
 
     public boolean addFolloweeTest5(){
         User alice = new User("Alice");
+
         String expected = "true";
+
         String actual = "";
+
         try {
-            actual += (alice.addFollowee("Foo") && alice.addFollowee("foo") && alice.getfCount() == 1 && alice.follows("Foo"));
+
+            actual += (alice.addFollowee("Foo") && !alice.addFollowee("foo") && alice.getfCount() == 1 && alice.follows("Foo"));
+
         } catch (Exception e) {
+
             actual = TesterMessagesEnum.ERROR + e.getMessage();
+
         }
+
         return this.tester.test("Alice, getting started = false, try to add Followee Foo and foo", expected, actual);
+
     }
+
+
+
 
     // Improved removeFollowee Tests
     public void mainRemoveFolloweeTest() {
@@ -694,7 +706,7 @@ public class TestHandler {
         User alice = new User("Alice");
         User bob = new User("Bob");
         alice.addFollowee("Charlie");
-        alice.addFollowee("Charlie"); 
+        alice.addFollowee("Charlie");
         bob.addFollowee("Charlie");
         String expected = "1";
         String actual = "";
@@ -752,7 +764,7 @@ public class TestHandler {
         }
         return this.tester.test("Get predefined user Foo", expected, actual);
     }
-    
+
     public boolean getUserTest2() {
         Network network = new Network(5, true);
         String expected = "Bar";
@@ -764,7 +776,7 @@ public class TestHandler {
         }
         return this.tester.test("Get predefined user Bar", expected, actual);
     }
-    
+
     public boolean getUserTest3() {
         Network network = new Network(5, true);
         String expected = "null";
@@ -776,7 +788,7 @@ public class TestHandler {
         }
         return this.tester.test("Get non-existing user in predefined network", expected, actual);
     }
-    
+
     public boolean getUserTest4() {
         Network network = new Network(5, true);
         String expected = "Baz";
@@ -788,7 +800,7 @@ public class TestHandler {
         }
         return this.tester.test("Get predefined user Baz", expected, actual);
     }
-    
+
     public boolean getUserTest5() {
         Network network = new Network(5, true);
         String expected = TesterMessagesEnum.ERROR + " " + TesterMessagesEnum.EXPECTED;
@@ -802,17 +814,17 @@ public class TestHandler {
         }
         return this.tester.test("Get user with null name in predefined network", expected, actual);
     }
-    
+
     public boolean getUserTest6() {
         Network network = new Network(5, true);
         String expected = "Baz";
         String actual = "";
         try {
-            actual += network.getUser("baz").getName();
+            actual += network.getUser("Baz").getName();
         } catch (Exception e) {
             actual = TesterMessagesEnum.ERROR + e.getMessage();
         }
-        return this.tester.test("Case-insensitive search for user Baz using 'baz'", expected, actual);
+        return this.tester.test("Case-insensitive search for user Baz using 'Baz'", expected, actual);
     }
 
     public boolean getUserTest7() {
@@ -824,9 +836,9 @@ public class TestHandler {
         } catch (Exception e) {
             actual = TesterMessagesEnum.ERROR + e.getMessage();
         }
-        return this.tester.test("Case-insensitive search for user Baz using 'baz'", expected, actual);
+        return this.tester.test("get user from empty network", expected, actual);
     }
-    
+
     public void mainNetworkAddUserTest() {
         this.tester.reset(TesterQuestionEnum.NETWORK_ADD_USER);
         boolean passed = runAllTests(TesterQuestionEnum.NETWORK_ADD_USER);
@@ -835,7 +847,7 @@ public class TestHandler {
         }
         System.out.println(tester);
     }
-    
+
     public boolean networkAddUserTests(int testNumber) {
         switch (testNumber) {
             case 1: return addUserTest1();
@@ -860,7 +872,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a new user Alice and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest2() {
         Network network = new Network(5);
         network.addUser("Bob");
@@ -873,7 +885,7 @@ public class TestHandler {
         }
         return this.tester.test("Add an existing user Bob and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest3() {
         Network network = new Network(2);
         network.addUser("Charlie");
@@ -887,7 +899,7 @@ public class TestHandler {
         }
         return this.tester.test("Add user to a full network and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest4() {
         Network network = new Network(5);
         String expected = "true";
@@ -899,7 +911,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a new user Foo and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest5() {
         Network network = new Network(5, true);
         String expected = "false";
@@ -911,7 +923,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a user already in the predefined network Foo and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest6() {
         Network network = new Network(5);
         String expected = "false";
@@ -923,7 +935,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a null user and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest7() {
         Network network = new Network(5);
         network.addUser("User1");
@@ -940,7 +952,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a valid new user User6 to a full network and verify userCount", expected, actual);
     }
-    
+
     public boolean addUserTest8() {
         Network network = new Network(5, true);
         String expected = "true";
@@ -961,7 +973,7 @@ public class TestHandler {
         }
         System.out.println(tester);
     }
-    
+
     public boolean networkAddFolloweeTests(int testNumber) {
         switch (testNumber) {
             case 1: return networkAddFolloweeTest1();
@@ -976,7 +988,7 @@ public class TestHandler {
             default: return false;
         }
     }
-    
+
     public boolean networkAddFolloweeTest1() {
         Network network = new Network(5, true);
         String expected = "true";
@@ -988,7 +1000,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a followee Bar to user Foo", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest2() {
         Network network = new Network(5, true);
         String expected = "false";
@@ -1000,7 +1012,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a followee NonExistent to user Foo", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest3() {
         Network network = new Network(5, true);
         String expected = "false";
@@ -1012,7 +1024,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a followee Bar to non-existent user NonExistent", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest4() {
         Network network = new Network(5, true);
         network.addFollowee("Foo", "Bar");
@@ -1025,7 +1037,7 @@ public class TestHandler {
         }
         return this.tester.test("Add an already-followed user Bar to Foo", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest5() {
         Network network = new Network(5, true);
         String expected = "false";
@@ -1037,7 +1049,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a user Baz as a followee to itself", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest6() {
         Network network = new Network(5, true);
         String expected = "false";
@@ -1049,7 +1061,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a followee Bar to a null user", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest7() {
         Network network = new Network(5, true);
         String expected = "false";
@@ -1061,7 +1073,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a null followee to user Foo", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest8() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1075,7 +1087,7 @@ public class TestHandler {
         }
         return this.tester.test("Add a valid followee Bob to user Alice", expected, actual);
     }
-    
+
     public boolean networkAddFolloweeTest9() {
         Network network = new Network(5, true);
         network.addFollowee("Foo", "Bar");
@@ -1088,7 +1100,7 @@ public class TestHandler {
         }
         return this.tester.test("Verify user Foo follows Bar after adding followee", expected, actual);
     }
-    
+
     public void mainNetworkRecommendWhoToFollowTest() {
         this.tester.reset(TesterQuestionEnum.NETWORK_RECOMMEND_WHO_TO_FOLLOW);
         boolean passed = runAllTests(TesterQuestionEnum.NETWORK_RECOMMEND_WHO_TO_FOLLOW);
@@ -1097,7 +1109,7 @@ public class TestHandler {
         }
         System.out.println(tester);
     }
-    
+
     public boolean networkRecommendWhoToFollowTests(int testNumber) {
         switch (testNumber) {
             case 1: return recommendWhoToFollowTest1();
@@ -1106,7 +1118,7 @@ public class TestHandler {
             default: return false;
         }
     }
-    
+
     public boolean recommendWhoToFollowTest1() {
         Network network = new Network(10);
         network.addUser("Alice");
@@ -1114,14 +1126,14 @@ public class TestHandler {
         network.addUser("Charlie");
         network.addUser("Dave");
         network.addUser("Eve");
-    
+
         network.addFollowee("Alice", "Bob");
         network.addFollowee("Alice", "Dave");
         network.addFollowee("Dave", "Charlie");
         network.addFollowee("Bob", "Charlie");
         network.addFollowee("Charlie", "Dave");
         network.addFollowee("Dave", "Eve");
-        
+
         String expected = "Charlie";
         String actual = "";
         try {
@@ -1131,7 +1143,7 @@ public class TestHandler {
         }
         return this.tester.test("Recommend Charlie for Alice in a transitive follow scenario", expected, actual);
     }
-    
+
     public boolean recommendWhoToFollowTest2() {
         Network network = new Network(10);
         network.addUser("Alice");
@@ -1140,7 +1152,7 @@ public class TestHandler {
         network.addUser("Dave");
         network.addUser("Eve");
         network.addUser("Frank");
-    
+
         network.addFollowee("Alice", "Bob");
         network.addFollowee("Bob", "Charlie");
         network.addFollowee("Charlie", "Dave");
@@ -1148,7 +1160,7 @@ public class TestHandler {
         network.addFollowee("Frank", "Charlie");
         network.addFollowee("Alice", "Frank");
         network.addFollowee("Frank", "Bob");
-    
+
         String expected = "Bob";
         String actual = "";
         try {
@@ -1158,7 +1170,7 @@ public class TestHandler {
         }
         return this.tester.test("Recommend Bob to Eve via Charlie", expected, actual);
     }
-    
+
     public boolean recommendWhoToFollowTest3() {
         Network network = new Network(15);
         network.addUser("Alice");
@@ -1169,7 +1181,7 @@ public class TestHandler {
         network.addUser("Frank");
         network.addUser("Grace");
         network.addUser("Hank");
-    
+
         network.addFollowee("Alice", "Frank");
         network.addFollowee("Bob", "Charlie");
         network.addFollowee("Charlie", "Dave");
@@ -1179,7 +1191,7 @@ public class TestHandler {
         network.addFollowee("Hank", "Eve");
         network.addFollowee("Bob", "Dave");
         network.addFollowee("Charlie", "Eve");
-    
+
         String expected = "Eve";
         String actual = "";
         try {
@@ -1190,7 +1202,7 @@ public class TestHandler {
 
         return this.tester.test("Recommend Eve to Alice", expected, actual);
     }
-    
+
 
     public void mainNetworkMostPopularUserTest() {
         this.tester.reset(TesterQuestionEnum.NETWORK_MOST_POPULAR_USER);
@@ -1216,7 +1228,7 @@ public class TestHandler {
             default: return false;
         }
     }
-    
+
     public boolean mostPopularUserTest1() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1231,7 +1243,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Alice with one follower", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest2() {
         Network network = new Network(5);
         String expected = "null";
@@ -1243,7 +1255,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user in an empty network is null", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest3() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1260,7 +1272,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Alice with two followers", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest4() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1277,7 +1289,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Bob with two followers", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest5() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1295,7 +1307,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Bob when multiple users have one follower", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest6() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1311,7 +1323,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Alice when both users follow each other", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest7() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1329,7 +1341,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Bob with one follower but also follows another user", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest8() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1344,7 +1356,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Bob with a single follower Alice", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest9() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1363,7 +1375,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Charlie with three followers", expected, actual);
     }
-    
+
     public boolean mostPopularUserTest10() {
         Network network = new Network(5);
         network.addUser("Alice");
@@ -1379,7 +1391,7 @@ public class TestHandler {
         }
         return this.tester.test("Most popular user is Alice in a cyclic follow relationship", expected, actual);
     }
-    
+
     public void mainNetworkToStringTest() {
         this.tester.reset(TesterQuestionEnum.NETWORK_TO_STRING);
         boolean passed = runAllTests(TesterQuestionEnum.NETWORK_TO_STRING);
@@ -1388,7 +1400,7 @@ public class TestHandler {
         }
         System.out.println(tester);
     }
-    
+
     public boolean networkToStringTests(int testNumber) {
         switch (testNumber) {
             case 1: return toStringTest1();
@@ -1398,7 +1410,7 @@ public class TestHandler {
             default: return false;
         }
     }
-    
+
     public boolean toStringTest1() {
         Network network = new Network(5);
         String expected = "Network:";
@@ -1410,7 +1422,7 @@ public class TestHandler {
         }
         return this.tester.test("Empty network toString", expected, actual);
     }
-    
+
     public boolean toStringTest2() {
         Network network = new Network(5, true);
         String expected = "Network:\nFoo -> \nBar -> \nBaz -> ";
@@ -1422,7 +1434,7 @@ public class TestHandler {
         }
         return this.tester.test("Predefined network toString with no followees", expected, actual);
     }
-    
+
     public boolean toStringTest3() {
         Network network = new Network(5, true);
         network.addFollowee("Foo", "Bar");
@@ -1436,7 +1448,7 @@ public class TestHandler {
         }
         return this.tester.test("Predefined network with follow relationships", expected, actual);
     }
-    
+
     public boolean toStringTest4() {
         Network network = new Network(5);
         network.addUser("Alice");

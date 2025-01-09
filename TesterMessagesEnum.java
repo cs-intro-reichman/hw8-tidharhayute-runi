@@ -6,8 +6,8 @@ public enum TesterMessagesEnum {
     FAILED("Failed"),
     ERROR("Error: "),
     ERROR_TA_ATTENTION("Error in tester, contact TA: "),
-    CASE_NUMBER("Case number: "), 
-    RESULT("Result: "); 
+    CASE_NUMBER("Case number: "),
+    RESULT("Result: ");
 
     private final String message;
     TesterMessagesEnum(String message) {

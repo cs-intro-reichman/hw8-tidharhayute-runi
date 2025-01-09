@@ -27,7 +27,7 @@ public class Tester {
         this.currQuestionpoints = 0;
         this.points = 0;
     }
-    
+
     public void reset() {
         this.nTestCases = 0;
         this.nPassed = 0;
@@ -123,7 +123,7 @@ public class Tester {
         this.expectedAllTest(input, expected, actual, hasPassed);
         return hasPassed;
     }
-    
+
     public void initQuestionTest(TesterQuestionEnum testQuestionEnum) {
         this.buildQuestionTitleName(testQuestionEnum);
         this.maxPoints += testQuestionEnum.getMaxPoints();
@@ -151,7 +151,7 @@ public class Tester {
         sb.append(TesterMetadataMessagesEnum.PASSED.getMessage()).append(this.nPassed).append("\n");
         sb.append(TesterMetadataMessagesEnum.FAILED.getMessage()).append(this.nFailed).append("\n");
         sb.append(TesterMetadataMessagesEnum.ERRORS.getMessage()).append(this.nErrors).append("\n");
-        this.appendPassedOrFailedCases(sb);   
+        this.appendPassedOrFailedCases(sb);
         return sb;
     }
 
@@ -185,7 +185,7 @@ public class Tester {
     public void showAllTests() {
         System.out.println(this.expectedAllTestsBuilder.toString());
     }
- 
+
     public void showAll() {
         System.out.println(this.expectedAll.toString());
     }
@@ -199,12 +199,12 @@ public class Tester {
     }
 
     public void gotExceptions() {
-        this.nErrors++; 
+        this.nErrors++;
     }
 
     public void conclusion(){
-        
+
         System.out.println("Your score is: " + this.points + "/" + this.maxPoints + " available points");
     }
-    
+
 }

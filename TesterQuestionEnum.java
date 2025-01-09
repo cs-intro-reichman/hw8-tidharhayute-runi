@@ -10,7 +10,7 @@ public enum TesterQuestionEnum {
     NETWORK_RECOMMEND_WHO_TO_FOLLOW("Network Class, recommendWhoToFollow method", 10),
     NETWORK_MOST_POPULAR_USER("Network Class, mostPopularUser method", 10),
     NETWORK_TO_STRING("Network Class, toString method", 8);
-    
+
     private final String question;
     private final int maxPoints;
     TesterQuestionEnum(String question, int maxPoints) {

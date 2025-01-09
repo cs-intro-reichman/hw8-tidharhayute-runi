@@ -67,7 +67,7 @@ import java.util.Arrays;
         if (fCount >= maxfCount) {
             return false;
         }
-        
+
         follows[fCount] = name;
         fCount++;
 
