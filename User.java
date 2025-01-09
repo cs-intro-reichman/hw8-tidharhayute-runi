@@ -58,15 +58,14 @@ import java.util.Arrays;
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
-        if (name == null || follows(name) || fCount >= maxfCount )
+        if (name == null || follows(name) || fCount >= maxfCount ) {
             return false;
-
-        follows[fCount] = name;
-        fCount ++;
-
-        return true;
+        } else {
+            follows[fCount] = name;
+            fCount ++;
+            return true;
+        }
     }
-
 
     /**
      * Removes the given name from the follows list of this user. If successful, returns true.
