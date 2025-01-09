@@ -45,26 +45,24 @@ import java.util.Arrays;
 
     /** If this user follows the given name, returns true; otherwise returns false. */
     public boolean follows(String name) {
-        Boolean found = false;
-
-        for (int i = 0; i < follows.length; i++) {
-            if (follows[i] != null && follows[i].equals(name)) {
-                found = true;
-                break; // Exit the loop early once found
+        for (int i = 0; i < maxfCount; i++){
+            if (follows[i] != null && follows[i].equalsIgnoreCase(name)){
+                return true;
             }
         }
-        return found;
+        return false;
     }
-    /** Makes this user follow the given name. If successful, returns true. 
+
+    /** Makes this user follow the given name. If successful, returns true.
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
-        if (name == null || follows(name) || fCount >= maxfCount ) {
-            return false;
-        } else {
-            follows[fCount] = name;
-            fCount ++;
-            return true;
-        }
+        if (this.follows(name)) return false;
+        if (fCount == maxfCount) return false;
+
+        follows[fCount] = name;
+        fCount++;
+
+        return true;
     }
 
     /**
